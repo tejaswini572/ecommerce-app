@@ -1,6 +1,7 @@
+import LoginPage from './pages/LoginPage'
 function App(){
   return (
-    <h1>Ecommerce-App</h1>
-  );
+    <div><LoginPage /></div>
+  )
 }
 export default App;
