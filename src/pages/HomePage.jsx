@@ -9,6 +9,7 @@ const HomePage = () => {
   const [categories,setCategories]=useState([])
   const [selectCategory,setSelectCategory]=useState('all')
   const [searchQuery,setSearchQuery]=useState('')
+  const [sortOrder,setSortOrder]=useState('default')
 
   const navigate=useNavigate()
 
@@ -40,10 +41,22 @@ if(error) return <div className="text-center text-red-500">{error}</div>
 const filteredProducts=products
 .filter(p=>selectCategory==='all'?true:p.category===selectCategory)
 .filter(p=>p.title.toLowerCase().includes(searchQuery.toLowerCase()))
+.sort((a,b)=>{
+    if(sortOrder === 'lowToHigh') return a.price-b.price
+    if(sortOrder === 'highToLow' ) return b.price-a.price
+    return 0;
+})
 return (
     <div className="bg-yellow-100 min-h-screen p-8">
         <h1 className="text-3xl font-bold mb-6 text-center">Products</h1>
-        
+        <select
+        value={sortOrder}
+        onChange={(e)=>setSortOrder(e.target.value)}
+         className="border px-4 py-2 rounded-lg mb-4">
+            <option value="default">Sort By</option>
+            <option value="lowToHigh">Price:Low to High</option>
+            <option value="highToLow">Price:High to Low</option>
+         </select>
         <input 
         type="text"
         placeholder="Search Products..."

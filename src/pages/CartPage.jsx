@@ -1,5 +1,6 @@
 import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const CartPage=()=>{
 const { cart, removeFromCart, updateQuantity }= useCart()
@@ -10,6 +11,7 @@ if (cart.length===0)
     const total=cart.reduce(
         (sum,item)=>sum+(item.price*item.quantity),0
 )
+
 return (
     <div className="min-h-screen bg-yellow-100 p-8">
         {cart.map(item=>(
@@ -24,7 +26,9 @@ return (
             <span>{item.quantity}</span>
             <button onClick={()=>updateQuantity(item.id,item.quantity+1)}>+</button>
             </div>
-            <button onClick={()=>removeFromCart(item.id)}>Remove</button>
+            <button onClick={()=>{removeFromCart(item.id)
+                toast.error('Item removed from the cart!')
+            }}>Remove</button>
             
                 </div>
                 </div>

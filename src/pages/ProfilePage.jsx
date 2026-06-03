@@ -33,14 +33,36 @@ const ProfilePage=()=> {
     return(
         <div className="min-h-screen bg-yellow-100 p-8">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold mb-4">User Profile</h1> 
-        <p>Name:{user.name.firstname}{user.name.lastname}</p>
-        <p>Username:{user.username}</p>
-        <p>Email:{user.email}</p>
-        <p>Phone:{user.phone}</p>
-        <p>City:{user.address.city}</p>
-        <p>Street: {user.address.street}</p>
-        </div></div>
-    )
+        <div className="flex flex-col items-center mb-6"><div className="bg-indigo-600 text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold mb-3">
+            {user.name.firstname[0].toUpperCase()}
+          </div>
+         <h1 className="text-2xl font-bold">{user.name.firstname} {user.name.lastname}</h1>
+          <p className="text-gray-400 text-sm">@{user.username}</p>
+        </div>
+
+        
+        <div className="flex flex-col gap-3">
+          <div className="bg-gray-50 rounded-lg px-4 py-3">
+            <p className="text-xs text-gray-400">Email</p>
+            <p className="font-semibold">{user.email}</p>
+          </div>
+          <div className="bg-gray-50 rounded-lg px-4 py-3">
+            <p className="text-xs text-gray-400">Phone</p>
+            <p className="font-semibold">{user.phone}</p>
+          </div>
+          <div className="bg-gray-50 rounded-lg px-4 py-3">
+            <p className="text-xs text-gray-400">City</p>
+            <p className="font-semibold">{user.address.city}</p>
+          </div>
+          <div className="bg-gray-50 rounded-lg px-4 py-3">
+            <p className="text-xs text-gray-400">Street</p>
+            <p className="font-semibold">{user.address.street}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
 }
+
 export default ProfilePage

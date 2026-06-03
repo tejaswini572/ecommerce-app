@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/authService'
 import { useAuth } from '../context/AuthContext'
+import toast from 'react-hot-toast'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -23,7 +24,7 @@ const LoginPage = () => {
 
       navigate('/home')
     } catch (err) {
-      setError('Invalid username or password')
+      toast.error('Invalid username or password')
     } finally {
       setLoading(false)
     }
