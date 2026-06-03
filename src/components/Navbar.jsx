@@ -21,6 +21,8 @@ const handleLogout = () => {
             <span>Hi,{user.username}!</span>
             <button onClick={()=>navigate('/profile')}>Profile</button>
             <button onClick={()=>navigate('/cart')}>🛒Cart({cart.length})</button>
+            <button onClick={()=>navigate('/wishlist')}>Wishlist</button>
+            
             
             <button onClick={handleLogout}>Logout</button>
         </div>

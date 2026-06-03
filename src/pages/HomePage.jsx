@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from'react-router-dom'
 import { getAllProducts, getCategories, getProductsByCategory } from '../services/productService'
+import { useWishlist } from '../context/WishlistContext'
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,8 @@ const HomePage = () => {
   const [sortOrder,setSortOrder]=useState('default')
 
   const navigate=useNavigate()
+  const { wishlist,addToWishlist,removeFromWishlist }=useWishlist()
+  const isWishlisted=(productId)=>wishlist.some(item=>item.id===productId)
 
   useEffect(()=>{
     const fetchProducts =async()=>{
@@ -90,7 +93,11 @@ return (
                     </p>
                     <p className="text-center font-bold text-sm text-black-600">Category:{product.category}</p>
                     <p className="text-center font-bold text-sm"> Rating :{product.rating.rate}</p>
-               
+               <button onClick={(e)=>{
+                e.stopPropagation()
+                isWishlisted(product.id)?removeFromWishlist(product.id)
+                : addToWishlist(product)
+               }}>{isWishlisted(product.id)?'❤️' : '🤍'}</button>
                 </div>
         ))}
     </div>

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import { useAuth } from './context/AuthContext'
 import ProtectedRouts from './routes/ProtectedRoutes'
 import ProfilePage from './pages/ProfilePage'
+import WishlistPage from './pages/WishlistPage'
 
 function App() {
   const { user }= useAuth()
@@ -20,6 +21,8 @@ function App() {
       <Route path="/product/:id" element={<ProtectedRouts><ProductDetailsPage /></ProtectedRouts>} />
      <Route path="/cart" element={<ProtectedRouts><CartPage  /></ProtectedRouts>} />
      <Route path ="/profile" element={<ProtectedRouts><ProfilePage /></ProtectedRouts>} />
+     <Route path ="/wishlist" element={<ProtectedRouts><WishlistPage /></ProtectedRouts>} />
+
      
     </Routes>
     </>
