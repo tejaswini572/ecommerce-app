@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
-import { getAllProducts } from '../services/productService'
 import { useNavigate } from'react-router-dom'
+import { getAllProducts, getCategories, getProductsByCategory } from '../services/productService'
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [categories,setCategories]=useState([])
+  const [selectCategory,setSelectCategory]=useState('all')
+  const [searchQuery,setSearchQuery]=useState('')
 
   const navigate=useNavigate()
 
@@ -14,6 +17,9 @@ const HomePage = () => {
     try{
         const data=await getAllProducts();
         setProducts(data);
+
+        const cats=await getCategories();
+        setCategories(cats);
     }
     catch(err)
     {
@@ -30,12 +36,33 @@ if(loading)
     return <div className="text-center p-4">Loading..</div>
 if(error) return <div className="text-center text-red-500">{error}</div>
 
+
+const filteredProducts=products
+.filter(p=>selectCategory==='all'?true:p.category===selectCategory)
+.filter(p=>p.title.toLowerCase().includes(searchQuery.toLowerCase()))
 return (
     <div className="bg-yellow-100 min-h-screen p-8">
         <h1 className="text-3xl font-bold mb-6 text-center">Products</h1>
         
+        <input 
+        type="text"
+        placeholder="Search Products..."
+        value={searchQuery}
+        onChange={(e)=>setSearchQuery(e.target.value)}
+        className="border px-4 py-2 rounded-lg w-full max-w-md mb-4"/>
+        <div className="flex gap-2 mb-6 justify-center flex-wrap font-serif">
+            <button onClick={()=>setSelectCategory('all')}
+            className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300">
+        All
+        </button>
+            {categories.map(cat=>(
+                <button key={cat} onClick={()=>setSelectCategory(cat)}className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300"
+    >{cat}</button>
+            
+            ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {products.map(product=>(
+        {filteredProducts.map(product=>(
             
             <div key={product.id}
                 onClick={()=>navigate(`/product/${product.id}`)}
@@ -54,7 +81,7 @@ return (
                 </div>
         ))}
     </div>
-    
+   
 </div>
     
 

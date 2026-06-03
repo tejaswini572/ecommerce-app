@@ -2,16 +2,27 @@ import { Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
-// import other pages...
+import CartPage from './pages/CartPage'
+import Navbar from './components/Navbar'
+import { useAuth } from './context/AuthContext'
+import ProtectedRouts from './routes/ProtectedRoutes'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
+  const { user }= useAuth()
   return (
+    <>
+    {user && <Navbar />}
     <Routes>
+      
       <Route path="/" element={<LoginPage />} />
-     <Route path="/home" element={<HomePage />} />
-      <Route path="/product/:id" element={<ProductDetailsPage />} />
-     {/* <Route path="/cart" element={CartPage} />*/}
+     <Route path="/home" element={<ProtectedRouts><HomePage /></ProtectedRouts>} />
+      <Route path="/product/:id" element={<ProtectedRouts><ProductDetailsPage /></ProtectedRouts>} />
+     <Route path="/cart" element={<ProtectedRouts><CartPage  /></ProtectedRouts>} />
+     <Route path ="/profile" element={<ProtectedRouts><ProfilePage /></ProtectedRouts>} />
+     
     </Routes>
+    </>
   )
 }
 export default App

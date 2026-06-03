@@ -2,6 +2,7 @@ import {useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
 import { useCart } from '../context/CartContext'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDetailsPage=()=>{
     const {id}=useParams()
@@ -9,6 +10,7 @@ const ProductDetailsPage=()=>{
     const [loading,setLoading]=useState(true);
     const [error,setError]=useState('');
     const { addToCart}=useCart()
+    const navigate=useNavigate();
 useEffect(()=>{
     const fetchProducts=async()=>{
         try{
@@ -35,7 +37,7 @@ if(loading){
     }
 return(
 <div className="min-h-screen bg-yellow-100 p-8">
-    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 flex gap-8">
+    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row gap-8">
         <img src={product.image} alt={product.title}
         className="h-72 w-72 object-contain" />
 
@@ -48,6 +50,18 @@ return(
         <button onClick={(e)=>addToCart(product)}className="mt-4 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
           Add to Cart
         </button>
+
+
+<button onClick={() => navigate('/cart')}
+    className="mt-3 bg-yellow-500 px-4 py-2 rounded text-white">
+  Go to Cart
+</button>
+
+
+<button onClick={() => navigate('/home')}
+    className="mt-3 bg-yellow-500 px-2 py-0.5 rounded text-white">
+  Back
+</button>
       </div>
     </div>
     </div>
