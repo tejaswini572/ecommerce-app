@@ -5,5 +5,5 @@ export const loginUser=async(username,password)=>{
         username:username,
         password:password
     })
-    return response.data
+    return response.data.token
 }
