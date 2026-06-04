@@ -1,8 +1,10 @@
-import { useWishlist } from '../context/WishlistContext'
-import { useNavigate } from 'react-router-dom'
 
+import { useNavigate } from 'react-router-dom'
+import { useSelector,useDispatch} from 'react-redux'
+import { addToWishlist,removeFromWishlist } from '../store/slices/wishlistSlice'
 const WishlistPage = () => {
-  const { wishlist, removeFromWishlist } = useWishlist()
+  const wishlist=useSelector(state=>state.wishlist)
+  const dispatch=useDispatch()
   const navigate = useNavigate()
 
   if(wishlist.length === 0) return <div className="min-h-screen bg-yellow-100 flex items-center justify-center text-2xl dark:bg-gray-900 dark:text-white">Your wishlist is empty! 🤍</div>
@@ -18,7 +20,7 @@ const WishlistPage = () => {
             <p className="text-green-600">${item.price}</p>
             <div className="flex gap-2 mt-2">
             <button onClick={()=>navigate(`/product/${item.id}`)}>View Product  </button>
-            <button onClick={()=>removeFromWishlist(item.id)}>Remove ❤️</button>
+            <button onClick={()=>dispatch(removeFromWishlist(item.id))}>Remove ❤️</button>
           </div>
           </div>
         ))}

@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import {useSelector,useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/authService'
-import { useAuth } from '../context/AuthContext'
+import  { login } from '../store/slices/authSlice'
 import { useTheme } from '../context/ThemeContext'
 import toast from 'react-hot-toast'
 import { getUserById } from '../services/userService'
 import { getAllUsers } from '../services/userService'
+import { useState } from 'react'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -13,7 +14,7 @@ const LoginPage = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const { login } = useAuth()
+  const dispatch=useDispatch()
   const navigate = useNavigate()
   const { isDark, toggleTheme }=useTheme()
 
@@ -31,8 +32,7 @@ const LoginPage = () => {
   return}
       
 
-      login({ username ,id:matchedUser.id}, token)
-
+      dispatch(login({user : {username,id:matchedUser.id},token}))
       navigate('/home')
     } catch (err) {
       toast.error('Invalid username or password')

@@ -1,4 +1,4 @@
-import { useContext,useState,createContext } from 'react'
+/*import { useContext,useState,createContext } from 'react'
 
 const CartContext=createContext();
 
@@ -39,4 +39,4 @@ return (
 );
 }
 export { CartContextProvider };
-export const useCart = () => useContext(CartContext);
+export const useCart = () => useContext(CartContext);*/

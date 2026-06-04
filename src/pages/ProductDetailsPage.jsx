@@ -1,17 +1,23 @@
 import {useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
-import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { addToCart } from '../store/slices/cartSlice'
+import{ useSelector, useDispatch } from 'react-redux'
+import { addToWishlist } from '../store/slices/wishlistSlice'
+
+
 
 const ProductDetailsPage=()=>{
     const {id}=useParams()
     const [product,setProduct]=useState(null);
     const [loading,setLoading]=useState(true);
     const [error,setError]=useState('');
-    const { addToCart}=useCart()
+    
     const navigate=useNavigate();
+    const cart=useSelector(state=>state.cart)
+    const dispatch=useDispatch()
 useEffect(()=>{
     const fetchProducts=async()=>{
         try{
@@ -38,8 +44,12 @@ if(loading){
     }
 
 const handleAddToCart=()=>{
-    addToCart(product)
+    dispatch(addToCart(product))
 toast.success('Added to Cart!')
+}
+const handleAddToWishlist = () => {
+    dispatch(addToWishlist(product))
+    toast.success('Added to Wishlist!')
 }
 return(
 <div className="min-h-screen bg-yellow-100 p-8 dark:bg-gray-900">
@@ -61,6 +71,9 @@ return(
 <button onClick={() => navigate('/cart')}
     className="mt-3 bg-yellow-500 px-4 py-2 rounded text-white">
   Go to Cart
+</button>
+<button onClick={handleAddToWishlist} className="mt-4 bg-pink-500 text-white px-6 py-2 rounded hover:bg-pink-600">
+  Add to Wishlist ❤️
 </button>
 
 

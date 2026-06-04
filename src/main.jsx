@@ -1,24 +1,23 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import { CartContextProvider } from './context/CartContext'
-import { WishlistProvider } from './context/WishlistContext' 
+
 import { ThemeContextProvider } from './context/ThemeContext' 
+import { Provider } from 'react-redux'
+import store  from './store/store'
 import './index.css'
 import App from './App.jsx'
 import {Toaster} from'react-hot-toast'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <AuthProvider>
-      <CartContextProvider>
-        <WishlistProvider>
+  <Provider store={store}>
+       
           <ThemeContextProvider>
+            
         <App />
         <Toaster position="top-right" />
         </ThemeContextProvider>
-        </WishlistProvider>
-      </CartContextProvider>
-    </AuthProvider>
+        
+    </Provider>
   </BrowserRouter>
 )

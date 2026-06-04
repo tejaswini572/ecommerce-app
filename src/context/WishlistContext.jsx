@@ -1,4 +1,4 @@
-import { useContext,useState,createContext } from 'react'
+/*import { useContext,useState,createContext } from 'react'
 
 const WishlistContext = createContext()
 
@@ -22,4 +22,4 @@ return (
     <WishlistContext.Provider value={{ wishlist,addToWishlist,removeFromWishlist }}>{children}</WishlistContext.Provider>
 )
 }
-export const useWishlist =()=>useContext(WishlistContext)
+export const useWishlist =()=>useContext(WishlistContext)*/

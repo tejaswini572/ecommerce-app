@@ -1,10 +1,12 @@
-import { useAuth } from '../context/AuthContext'
-import {Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
-const ProtectedRouts=({children}) =>{
-    const {user }= useAuth()
+const ProtectedRouts = ({ children }) => {
+  const user = useSelector((state) => state.auth.user)
 
-    if(!user) return <Navigate to="/" />
-    return children 
+  if (!user) return <Navigate to="/" />
+
+  return children
 }
- export default ProtectedRouts
+
+export default ProtectedRouts

@@ -1,9 +1,14 @@
-import { useCart } from '../context/CartContext'
+
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart, removeFromCart, updateQuantity } from '../store/slices/cartSlice'
 
 const CartPage=()=>{
-const { cart, removeFromCart, updateQuantity }= useCart()
+const cart=useSelector(state=>state.cart)
+const dispatch=useDispatch()
+
+
 const navigate=useNavigate();
   
 if (cart.length===0)
@@ -22,15 +27,15 @@ return (
                     <p>${item.price}</p>
                     <p>subtotal:${item.price*item.quantity}</p>
                 <div className="flex gap-2 items-center">
-            <button className="bg-gray-200 px-3 py-1 rounded font-bold" onClick={()=>updateQuantity(item.id,item.quantity-1)}>-</button>
+            <button className="bg-gray-200 px-3 py-1 rounded font-bold" onClick={()=>dispatch(updateQuantity({id: item.id,quantity:item.quantity-1}))}>-</button>
             <span className="px-2">{item.quantity}</span>
-            <button className ="bg-gray-200 px-3 py-1 rounded font-bold" onClick={()=>updateQuantity(item.id,item.quantity+1)}>+</button>
+            <button className ="bg-gray-200 px-3 py-1 rounded font-bold" onClick={()=>dispatch(updateQuantity({id: item.id,quantity:item.quantity+1}))}>+</button>
             </div>
             <button
              className="mt-2 text-red-500 font-semibold"
-             onClick={()=>{removeFromCart(item.id)
-                toast.error('Item removed from the cart!')
-            }}>Remove</button>
+             onClick={()=>{ dispatch(removeFromCart(item.id))
+                toast.error('Item removed from the cart!')}}>
+            Remove</button>
             
                 </div>
                 </div>

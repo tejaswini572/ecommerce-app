@@ -4,14 +4,14 @@ import HomePage from './pages/HomePage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import CartPage from './pages/CartPage'
 import Navbar from './components/Navbar'
-import { useAuth } from './context/AuthContext'
+import { useSelector } from 'react-redux'
 import ProtectedRouts from './routes/ProtectedRoutes'
 import ProfilePage from './pages/ProfilePage'
 import WishlistPage from './pages/WishlistPage'
 import { useTheme } from './context/ThemeContext'
 
 function App() {
-  const { user }= useAuth()
+  const user = useSelector(state=>state.auth.user)
   const { isDark } =useTheme()
   return (
     <div className={isDark ? 'dark':''}>
