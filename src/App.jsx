@@ -8,11 +8,15 @@ import { useAuth } from './context/AuthContext'
 import ProtectedRouts from './routes/ProtectedRoutes'
 import ProfilePage from './pages/ProfilePage'
 import WishlistPage from './pages/WishlistPage'
+import { useTheme } from './context/ThemeContext'
 
 function App() {
   const { user }= useAuth()
+  const { isDark } =useTheme()
   return (
-    <>
+    <div className={isDark ? 'dark':''}>
+      
+    
     {user && <Navbar />}
     <Routes>
       
@@ -25,7 +29,8 @@ function App() {
 
      
     </Routes>
-    </>
+    </div>
+    
   )
 }
 export default App

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/authService'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 import toast from 'react-hot-toast'
 
 const LoginPage = () => {
@@ -12,6 +13,7 @@ const LoginPage = () => {
 
   const { login } = useAuth()
   const navigate = useNavigate()
+  const { isDark, toggleTheme }=useTheme()
 
   const handleLogin = async () => {
     setLoading(true)
@@ -31,8 +33,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+    
+    <div className="relative min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-gray-900 dark:to-gray-900 flex items-center justify-center px-4">
+      <div className="absolute top-4 right-4"><button onClick={toggleTheme}>{isDark? '🌙':'☀️'}</button>
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md dark:bg-gray-800">
         
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-indigo-600">
@@ -83,6 +88,7 @@ const LoginPage = () => {
           Test: mor_2314 / 83r5^_
         </p>
       </div>
+      
     </div>
   )
 }

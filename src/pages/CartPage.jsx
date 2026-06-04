@@ -13,9 +13,9 @@ if (cart.length===0)
 )
 
 return (
-    <div className="min-h-screen bg-yellow-100 p-8">
+    <div className="min-h-screen bg-yellow-100 p-8 dark:bg-gray-900 dark:text-white">
         {cart.map(item=>(
-            <div key={item.id} className ="bg-white rounded-lg shadow p-4 mb-4 flex flex-col md:flex-row gap-4">
+            <div key={item.id} className ="bg-white rounded-lg shadow p-4 mb-4 flex flex-col md:flex-row gap-4 dark:bg-gray-800 ">
                 <img src={item.image} className="h-24 w-24 object-contain" />
                 <div>
                     <h2>{item.title}</h2>

@@ -1,11 +1,13 @@
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
 
 const Navbar=()=>{
     const {user,logout }=useAuth()
     const {cart}=useCart()
     const navigate =useNavigate()
+    const {isDark,toggleTheme}=useTheme()
     
 const handleLogout = () => {
     logout()
@@ -22,7 +24,7 @@ const handleLogout = () => {
             <button onClick={()=>navigate('/profile')}>Profile</button>
             <button onClick={()=>navigate('/cart')}>🛒Cart({cart.length})</button>
             <button onClick={()=>navigate('/wishlist')}>Wishlist</button>
-            
+            <button onClick={toggleTheme}>{isDark? '🌙':'☀️'}</button>
             
             <button onClick={handleLogout}>Logout</button>
         </div>
