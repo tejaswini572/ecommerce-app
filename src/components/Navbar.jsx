@@ -19,7 +19,7 @@ const handleLogout = () => {
         <nav className="bg-indigo-600 text-white px-4 md:px-8 py-4 flex flex-wrap justify-between items-center gap-2">
         <h1 onClick={()=>navigate('/home')} className="text-xl font-bold cursor-pointer">ShopEasy</h1>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex  flex-wrap gap-4 items-center text-sm">
             <span>Hi,{user.username}!</span>
             <button onClick={()=>navigate('/profile')}>Profile</button>
             <button onClick={()=>navigate('/cart')}>🛒Cart({cart.length})</button>

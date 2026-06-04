@@ -64,7 +64,7 @@ return (
         <select
         value={sortOrder}
         onChange={(e)=>setSortOrder(e.target.value)}
-         className="border px-4 py-2 rounded-lg mb-4 dark:bg-gray-800 text-white">
+         className="border px-4 py-2 rounded-lg mb-4 dark:bg-gray-800 dark:text-white">
             <option value="default">Sort By</option>
             <option value="lowToHigh">Price:Low to High</option>
             <option value="highToLow">Price:High to Low</option>
@@ -74,14 +74,14 @@ return (
         placeholder="Search Products..."
         value={searchQuery}
         onChange={(e)=>setSearchQuery(e.target.value)}
-        className="border px-4 py-2 rounded-lg w-full max-w-md mb-4 dark:bg-gray-800 text-white"/>
+        className="border px-4 py-2 rounded-lg w-full max-w-md mb-4 dark:bg-gray-800 dark:text-white"/>
         <div className="flex gap-2 mb-6 justify-center flex-wrap font-serif">
             <button onClick={()=>setSelectCategory('all')}
-            className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300 dark:bg-gray-800 text-white">
+            className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300 dark:bg-gray-800 dark:text-white">
         All
         </button>
             {categories.map(cat=>(
-                <button key={cat} onClick={()=>setSelectCategory(cat)}className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300 dark:bg-gray-800 text-white"
+                <button key={cat} onClick={()=>setSelectCategory(cat)}className="bg-yellow-200 px-4 py-2 rounded-full shadow hover:bg-yellow-300 dark:bg-gray-800 dark:text-white"
     >{cat}</button>
             
             ))}
@@ -91,7 +91,7 @@ return (
             
             <div key={product.id}
                 onClick={()=>navigate(`/product/${product.id}`)}
-                 className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300 cursor-pointer dark:bg-gray-800 text-white">
+                 className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition duration-300 cursor-pointer dark:bg-gray-800 dark:text-white">
     
                 <img src={product.image} alt={product.title} className="h-48 object-contain w-full" />
                 <h2 className="font-bold text-sm line-clamp-2 mt-2">
@@ -100,8 +100,8 @@ return (
                 <p className="text-green-600">
                     ${product.price}
                     </p>
-                    <p className="text-center font-bold text-sm text-black-600">Category:{product.category}</p>
-                    <p className="text-center font-bold text-sm"> Rating :{product.rating.rate}</p>
+                    <p className="font-bold text-sm text-black-600 ">Category:{product.category}</p>
+                    <p className="font-bold text-sm"> Rating :{product.rating.rate}</p>
                <button onClick={(e)=>{
                 e.stopPropagation()
                 isWishlisted(product.id)?removeFromWishlist(product.id)

@@ -43,7 +43,7 @@ toast.success('Added to Cart!')
 }
 return(
 <div className="min-h-screen bg-yellow-100 p-8 dark:bg-gray-900">
-    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row gap-8 dark:bg-gray-800 text-white ">
+    <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row gap-8 dark:bg-gray-800 dark:text-white ">
         <img src={product.image} alt={product.title}
         className="h-72 w-72 object-contain" />
 

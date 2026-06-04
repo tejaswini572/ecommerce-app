@@ -4,6 +4,8 @@ import { loginUser } from '../services/authService'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import toast from 'react-hot-toast'
+import { getUserById } from '../services/userService'
+import { getAllUsers } from '../services/userService'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -21,8 +23,15 @@ const LoginPage = () => {
 
     try {
       const token = await loginUser(username, password)
+      const users=await getAllUsers()
+      
+        const matchedUser=users.find(u=>u.username === username)
+        if(!matchedUser) {
+  toast.error('User not found!')
+  return}
+      
 
-      login({ username }, token)
+      login({ username ,id:matchedUser.id}, token)
 
       navigate('/home')
     } catch (err) {
@@ -34,7 +43,7 @@ const LoginPage = () => {
 
   return (
     
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-gray-900 dark:to-gray-900 flex items-center justify-center px-4">
+    <div className="relative min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 dark:from-gray-900 dark:to-gray-900 flex items-center justify-center px-4 py-8">
       <div className="absolute top-4 right-4"><button onClick={toggleTheme}>{isDark? '🌙':'☀️'}</button>
       </div>
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md dark:bg-gray-800">

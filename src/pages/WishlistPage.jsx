@@ -5,7 +5,7 @@ const WishlistPage = () => {
   const { wishlist, removeFromWishlist } = useWishlist()
   const navigate = useNavigate()
 
-  if(wishlist.length === 0) return <div className="min-h-screen bg-yellow-100 flex items-center justify-center text-2xl">Your wishlist is empty! 🤍</div>
+  if(wishlist.length === 0) return <div className="min-h-screen bg-yellow-100 flex items-center justify-center text-2xl dark:bg-gray-900 dark:text-white">Your wishlist is empty! 🤍</div>
 
   return (
     <div className="min-h-screen bg-yellow-100 p-8 dark:bg-gray-900">
@@ -16,8 +16,10 @@ const WishlistPage = () => {
             <img src={item.image} className="h-48 object-contain w-full" />
             <h2 className="font-bold text-sm mt-2">{item.title}</h2>
             <p className="text-green-600">${item.price}</p>
-            <button onClick={()=>navigate(`/product/${item.id}`)}>View Product</button>
+            <div className="flex gap-2 mt-2">
+            <button onClick={()=>navigate(`/product/${item.id}`)}>View Product  </button>
             <button onClick={()=>removeFromWishlist(item.id)}>Remove ❤️</button>
+          </div>
           </div>
         ))}
       </div>

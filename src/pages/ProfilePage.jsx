@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react'
 import { getUserById } from '../services/userService'
+import { useAuth } from '../context/AuthContext'
 
 
 const ProfilePage=()=> {
@@ -7,12 +8,13 @@ const ProfilePage=()=> {
     const [loading,setLoading]=useState(true)
     const [error,setError]=useState('')
 
+const { user: authUser }=useAuth()
 
     useEffect(()=>{
       
         const fetchUser=async()=>{
               try{
-            const data=await getUserById(1)
+            const data=await getUserById(authUser.id)
             setUser(data)
         }
         catch(err)
